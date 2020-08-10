@@ -1,0 +1,21 @@
+# 1. CI Step
+    # 1. Create an aspnetcore 3.1 web api, add the required probes(heathcheck and readiness)
+    # 1.a Create dockerfile for the app -> Multi-stage build -> For runtime image define user and delete unneccessary files like apt-get files 
+    # 1.b Create repo on github 
+    # 1.c Create account on CircleCI and associate with github 
+    # 1.d create circleci config for the project
+    # 1.d Create public repo on dockerhub and push the runtime build image to the hub 
+
+# 2. CD Step 
+    # 2.a Define the Deployment step as another job 
+    # 2.b Define helm chart
+    # 2.c Add project variables (hub address, project name, ports)
+    # 2.d Add k8s config for helm to access to cluster
+
+# 3. k8s Cluster 
+    # 3.a Create aws network with terraform as private. Just allow to given port in the assessment. Do we need it?
+     Can we just use the LB serviceType to access to web server
+    # 3.b Create role for kops and attach the require policies 
+    # 3.c Create kops-admin instance to create cluster 
+    # 3.d Add cluster creation script with terraform
+
