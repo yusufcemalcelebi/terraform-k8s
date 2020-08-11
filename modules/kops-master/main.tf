@@ -32,25 +32,22 @@ resource "aws_instance" "kops-master-instance" {
     network_interface_id = aws_network_interface.kops-master-nic.id
   }
 
-  # provisioner "file" {
-  #   source      = "${path.module}/configurations/create-cluster.sh"
-  #   destination = "/tmp/create-cluster.sh"
-  # }
+  provisioner "file" {
+    source      = "${path.module}/configurations/create-cluster.sh"
+    destination = "/tmp/create-cluster.sh"
+  }
 
-  # provisioner "file" {
-  #   source      = "${path.module}/configurations/install-plugins.sh"
-  #   destination = "/tmp/install-plugins.sh"
-  # }
+  provisioner "file" {
+    source      = "${path.module}/configurations/install-plugins.sh"
+    destination = "/tmp/install-plugins.sh"
+  }
 
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "chmod +x /tmp/install-plugins.sh",
-  #     "/tmp/install-plugings.sh args",
-
-  #     "chmod +x /tmp/create-cluster.sh",
-  #     "/tmp/create-cluster.sh ${var.vpc}",
-  #   ]
-  # }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/install-plugins.sh",
+      "/tmp/install-plugins.sh",
+    ]
+  }
 
   tags = {
     Name = "kops-master"
