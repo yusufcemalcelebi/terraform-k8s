@@ -64,25 +64,11 @@ resource "aws_route_table_association" "prod-private-route-table-subnet-associat
   route_table_id = aws_route_table.prod-private-route-table.id
 }
 
-resource "aws_security_group" "allow-web" {
-  name        = "allow_web_traffic"
-  description = "Allow Web inbound traffic"
+resource "aws_security_group" "allow-ssh" {
+  name        = "allow_ssh_connection"
+  description = "Allow ssh connection to run kops commands"
   vpc_id      = aws_vpc.prod-vpc.id
 
-  ingress {
-    description = "HTTPS"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    description = "HTTP"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
   ingress {
     description = "SSH"
     from_port   = 22
@@ -99,6 +85,6 @@ resource "aws_security_group" "allow-web" {
   }
 
   tags = {
-    Name = "allow_web"
+    Name = "allow_ssh"
   }
 }
